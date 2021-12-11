@@ -2,6 +2,7 @@ package com.example.webserviceuppgift1;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,12 +16,19 @@ public class PersonController {
     PersonRepository personRepository;
 
     @PostMapping("/create")
-    public PersonEntity create(@Valid @RequestBody PersonEntity person){
+    public PersonEntity createPerson(@Valid @RequestBody PersonEntity person){
         person.setId(UUID.randomUUID().toString());
         return personRepository.save(person);
     }
 
-    /*public String delete(@PathVariable(value = "id")String id){
-     return personService.delete(id);
+    /*@DeleteMapping("/delete/{id}")
+    public Map<String, Boolean> deletePerson(@PathVariable(value = "id") String id){
+     return personService.deletePerson(id);
     }*/
+
+    @PutMapping
+    public ResponseEntity<PersonEntity> updatePerson(@PathVariable(value = "id") String id, @Valid @RequestBody PersonEntity person) throws Exception{
+        final PersonEntity updatePerson = personService.getPersonEntity(id, person);
+        return ResponseEntity.ok(updatePerson);
+    }
 }

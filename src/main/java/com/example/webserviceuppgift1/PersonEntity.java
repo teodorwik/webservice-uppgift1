@@ -17,11 +17,13 @@ public class PersonEntity {
     String id;
     String firstName;
     String lastName;
+    String groups;
 
 
     public PersonEntity(String firstName, String lastName) {
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
+        this.groups = groups;
     }
 }
