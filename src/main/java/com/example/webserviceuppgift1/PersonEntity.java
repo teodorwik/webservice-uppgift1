@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -17,13 +19,15 @@ public class PersonEntity {
     String id;
     String firstName;
     String lastName;
-    String groups;
+
+    @ElementCollection
+    List<String> Groups;
 
 
-    public PersonEntity(String firstName, String lastName) {
+    public PersonEntity(String firstName, String lastName, List<String> groups) {
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.groups = groups;
+        Groups = groups;
     }
 }

@@ -17,7 +17,9 @@ public class PersonService {
         return personRepository.save(personEntity);
     }
 
-    public void deletePerson(String id) throws Exception{
+    public String deletePerson(String id) throws Exception{
         PersonEntity person = personRepository.findById(id).orElseThrow();
+        personRepository.delete(person);
+        return id;
     }
 }

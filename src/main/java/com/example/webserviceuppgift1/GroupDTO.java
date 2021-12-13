@@ -2,15 +2,19 @@ package com.example.webserviceuppgift1;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 @Getter
 public class GroupDTO {
     String id;
     String groupName;
-    String members; //List<PersonDTO> members;
+    List<PersonDTO> members;
 
-    public GroupDTO(String id, String groupName, String members) {
-        this.id = id;
+    public GroupDTO(String groupName) {
+        this.id = UUID.randomUUID().toString();
         this.groupName = groupName;
-        this.members = members; //ArrayList
+        this.members = new ArrayList<>(); //ArrayList
     }
 }

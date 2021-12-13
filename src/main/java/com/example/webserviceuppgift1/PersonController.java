@@ -15,16 +15,22 @@ public class PersonController {
     PersonService personService;
     PersonRepository personRepository;
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<PersonEntity> getPersonById(@PathVariable(value= "id") String id ) throws Exception{
+        PersonEntity person = personRepository.findById(id).orElseThrow();
+        return ResponseEntity.ok().body(person);
+    }
+
     @PostMapping("/create")
     public PersonEntity createPerson(@Valid @RequestBody PersonEntity person){
         person.setId(UUID.randomUUID().toString());
         return personRepository.save(person);
     }
 
-    /*@DeleteMapping("/delete/{id}")
-    public Map<String, Boolean> deletePerson(@PathVariable(value = "id") String id){
-     return personService.deletePerson(id);
-    }*/
+    @DeleteMapping("/delete/{id}")
+    public String deletePerson(@PathVariable(value ="id") String id) throws Exception {
+        return personService.deletePerson(id);
+    }
 
     @PutMapping
     public ResponseEntity<PersonEntity> updatePerson(@PathVariable(value = "id") String id, @Valid @RequestBody PersonEntity person) throws Exception{

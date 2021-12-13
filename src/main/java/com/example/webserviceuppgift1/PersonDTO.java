@@ -2,17 +2,20 @@ package com.example.webserviceuppgift1;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class PersonDTO {
     String id;
     String firstName;
     String lastName;
-    String groups;
+    List<GroupDTO> Groups;
 
-    public PersonDTO(String id, String firstName, String lastName, String groups) {
+    public PersonDTO(String id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.groups = groups;
+        this.Groups = new ArrayList<>();
     }
 }
